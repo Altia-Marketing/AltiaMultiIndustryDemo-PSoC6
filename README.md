@@ -31,7 +31,7 @@ For this demo, you need to:
 
 ## Board Connection Setup
 The image below shows the PSoC™ 6 evaluation board with the display shield mounted.
-![](.github/img/board.jpg)
+![](images/board.jpg)
 - **A** Micro-USB connector (J6) for debugging and flash programming
 - **B** SW4 (USER BTN2)
 - **C** SW2 (USER BTN1)
@@ -49,16 +49,16 @@ Below is the overview of two project components that are needed to build the Alt
 ## Build Altia HMI from Altia Launcher
 1. From Altia Launcher window, click the “Create Project” button from the Project view.
 2. Select the Infineon PSoC 6 configuration when creating the project. Make sure that “Include tutorial content” is checked then press the “Next” button:
-![](.github/img/template.jpg)
+![](images/template.jpg)
 3. A Save-As Dialog will appear.  Enter the name “ByteSizedDemo” for your new project and press Save.  Your new project will now appear in the Project View.
 4. From the Project View, click the “…” button at the top right of the project image icon and select “Generate Target Code” to trigger the code generation:
-![](.github/img/generate.jpg)
+![](images/generate.jpg)
 5. Allow the upload of the project to Altia for code generation:
-![](.github/img/upload.jpg)
+![](images/upload.jpg)
 6. The progress of the code generation can be observed in the Activities View:
-![](.github/img/activities.jpg)
+![](images/activities.jpg)
 7. When the code generation is complete, download the results by clicking the download icon in the Activities View:
-![](.github/img/download.jpg)
+![](images/download.jpg)
 8. You will download the results later after setting up ModusToolBox
 
 ## Using the code example
