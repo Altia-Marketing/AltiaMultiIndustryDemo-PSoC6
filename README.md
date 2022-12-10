@@ -143,7 +143,7 @@ For a list of supported IDEs and more details, see the "Exporting to IDEs" secti
 
 ## Step-by-step instructions to build the project
 
-1. In the project folder just created, create a folder one level above (you should have the *mtb_shared* in the same level) the project folder and name it “ByteSizedDemo”.
+1. Create a folder named “ByteSizedDemo” in the project root folder that you just created.
 2. Return to the Altia Launcher > Activities Tab. Select the download button for the design you build in the previous section. A Save-As Dialog will appear.  Pick the ByteSizedDemo folder you just created for the download.
 3. A File Explorer window will open after the download is complete.  The following folders will be present:
   1. “log” folder – contains the logs from the code generation.

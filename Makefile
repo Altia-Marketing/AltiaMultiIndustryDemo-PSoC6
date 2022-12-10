@@ -23,7 +23,7 @@
 # limitations under the License.
 ################################################################################
 
-HMI_DIR=../ByteSizedDemo
+HMI_DIR=./ByteSizedDemo
 HMI=ByteSizedDemo
 
 ################################################################################
@@ -64,7 +64,7 @@ TOOLCHAIN=GCC_ARM
 CONFIG=Release
 
 # If set to "true" or "1", display full command-lines when building.
-VERBOSE=
+VERBOSE=1
 
 
 ################################################################################
@@ -130,7 +130,11 @@ LDLIBS=$(HMI_DIR)/out/libaltia.a
 LINKER_SCRIPT=$(wildcard ./linker_script/TARGET_$(TARGET)/TOOLCHAIN_$(TOOLCHAIN)/COMPONENT_CM4/*.ld)
 
 # Custom pre-build commands to run.
+ifeq ("$(wildcard $(HMI_DIR))", "")
+$(warning "ByteSizedDemo directory doesn't exist. Create this folder and use Altia Launcher to generate files within it")
+else
 PREBUILD=$(CY_TOOLS_PATHS)/gcc/bin/arm-none-eabi-ld.exe -r -b binary -o $(HMI_DIR)/out/reflash/$(HMI)/altia_table_bin.o $(HMI_DIR)/out/reflash/$(HMI)/table.bin; $(CY_TOOLS_PATHS)/gcc/bin/arm-none-eabi-ld -r -b binary -o $(HMI_DIR)/out/reflash/$(HMI)/images/altia_images_bin.o $(HMI_DIR)/out/reflash/$(HMI)/images/altiaImageDataPartition0.bin; $(CY_TOOLS_PATHS)/gcc/bin/arm-none-eabi-ld -r -b binary -o $(HMI_DIR)/out/reflash/$(HMI)/fonts/altia_fonts_bin.o $(HMI_DIR)/out/reflash/$(HMI)/fonts/altiaImageDataPartition0.bin;
+endif
 
 # Custom post-build commands to run.
 POSTBUILD=
