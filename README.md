@@ -40,7 +40,7 @@ The image below shows the PSoC™ 6 evaluation board with the display shield mou
 ## Build Altia Multi-Industry Demo via ModusToolBox
 Below is the overview of two project components that are needed to build the Altia multi-industry demo via ModuToolbox IDE. Check out these two projects from GitHub and clone them into the local folder. The next sections describe how to build Altia HMI first from Altia Launch and then how to use ModusToolbox IDE to build the demo.
 
-1. The Altia Project for the Infineon PSOC 6 platform.  See section (#Build Altia HMI from Altia Launcher)
+1. The Altia Project for the Infineon PSOC 6 platform.  See section [Build Altia HMI from Altia Launcher](#build-altia-hmi-from-altia-launcher)
 2. The ModusToolBox Sample project (this repository)
   1. Built and tested with ModusTooBox v2.4.0
   1. The content of the AltiaHMISample_CY8CKIT-028-TFT folder must be imported as a project into the ModusToolBox IDE. After updating the ModusToolBox Libraries, the demo application can be built and deployed to the PSoC 6 evaluation board.
