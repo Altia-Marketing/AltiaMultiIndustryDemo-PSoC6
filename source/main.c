@@ -63,28 +63,28 @@ MINIGL_INT16 backBuffer[320 * 240] = {0};
 
 void * bsp_GetBackFrameBuffer()
 {
-	return backBuffer;
+    return backBuffer;
 }
 
 uint16_t ARGB8888_TO_RGB565(MINIGL_UINT value)
 {
-	uint16_t red = (value & 0x00F80000) >> 19;
-	uint16_t green = (value & 0x0000FC00) >> 10;
-	uint16_t blue = (value & 0x000000F8) >> 3;
+    uint16_t red = (value & 0x00F80000) >> 19;
+    uint16_t green = (value & 0x0000FC00) >> 10;
+    uint16_t blue = (value & 0x000000F8) >> 3;
 
-	return ((red << 11) | (green << 5) | blue);
+    return ((red << 11) | (green << 5) | blue);
 }
 
 MINIGL_INT bsp_DriverFlushed(MINIGL_CONST MINIGL_INT16 dirtyExtentCount, MINIGL_CONST BSP_CLIPPING_RECTANGLE * dirtyExtentList)
 {
-	MINIGL_INT16 extentCount;
+    MINIGL_INT16 extentCount;
 
-	for(extentCount = 0; extentCount < dirtyExtentCount; extentCount++)
-	{
-		TFT_UpdateArea(dirtyExtentList[extentCount].x0, dirtyExtentList[extentCount].y0, dirtyExtentList[extentCount].x1, dirtyExtentList[extentCount].y1, backBuffer);
-	}
+    for(extentCount = 0; extentCount < dirtyExtentCount; extentCount++)
+    {
+        TFT_UpdateArea(dirtyExtentList[extentCount].x0, dirtyExtentList[extentCount].y0, dirtyExtentList[extentCount].x1, dirtyExtentList[extentCount].y1, backBuffer);
+    }
 
-	return 0;
+    return 0;
 }
 
 extern uint32_t __altia_table_start__;
@@ -98,31 +98,31 @@ MINIGL_UINT8 *altiaFonts = (MINIGL_UINT8 *)&__altia_fonts_start__;
 
 MINIGL_UINT8 * bsp_ReflashQueryString(MINIGL_CONST MINIGL_UINT16 * string)
 {
-	MINIGL_CONST MINIGL_UINT8 *address = NULL;
+    MINIGL_CONST MINIGL_UINT8 *address = NULL;
 
-	char local_string[128] = {0};
-	MINIGL_UINT32 count = 0;
+    char local_string[128] = {0};
+    MINIGL_UINT32 count = 0;
 
-	if(string == NULL)
-	{
-		return altiaTable;
-	}
+    if(string == NULL)
+    {
+        return altiaTable;
+    }
 
-	while((count < 128) && (string[count] != 0x0000))
-	{
-		local_string[count] = (MINIGL_UINT8)string[count];
-		count++;
-	}
+    while((count < 128) && (string[count] != 0x0000))
+    {
+        local_string[count] = (MINIGL_UINT8)string[count];
+        count++;
+    }
 
-	if(0 == strcmp(local_string, "\\images"))
-	{
-		address = altiaImages;
-	}
+    if(0 == strcmp(local_string, "\\images"))
+    {
+        address = altiaImages;
+    }
 #if 1
-	else if(0 == strcmp(local_string, "\\fonts"))
-	{
-		address = altiaFonts;
-	}
+    else if(0 == strcmp(local_string, "\\fonts"))
+    {
+        address = altiaFonts;
+    }
 #endif
     return (MINIGL_UINT8 *)address;
 }
@@ -153,49 +153,49 @@ cy_stc_scb_uart_context_t debug_uart_context;
 /* This structure is used to initialize a single GPIO pin using PDL configuration. */
 const cy_stc_gpio_pin_config_t P0_4_Pin_Init =
 {
-	.outVal     = 1u,                   /* Pin output state */
-	.driveMode  = CY_GPIO_DM_PULLUP,    /* Drive mode */
-	.hsiom      = HSIOM_SEL_GPIO,       /* HSIOM selection */
-	.intEdge    = CY_GPIO_INTR_FALLING, /* Interrupt Edge type */
-	.intMask    = CY_GPIO_INTR_EN_MASK, /* Interrupt enable mask */
-	.vtrip      = CY_GPIO_VTRIP_CMOS,   /* Input buffer voltage trip type */
-	.slewRate   = CY_GPIO_SLEW_FAST,    /* Output buffer slew rate */
-	.driveSel   = CY_GPIO_DRIVE_FULL,   /* Drive strength */
-	.vregEn     = 0u,                   /* SIO pair output buffer mode */
-	.ibufMode   = 0u,                   /* SIO pair input buffer mode */
-	.vtripSel   = 0u,                   /* SIO pair input buffer trip point */
-	.vrefSel    = 0u,                   /* SIO pair reference voltage for input buffer trip point */
-	.vohSel     = 0u                    /* SIO pair regulated voltage output level */
+    .outVal     = 1u,                   /* Pin output state */
+    .driveMode  = CY_GPIO_DM_PULLUP,    /* Drive mode */
+    .hsiom      = HSIOM_SEL_GPIO,       /* HSIOM selection */
+    .intEdge    = CY_GPIO_INTR_FALLING, /* Interrupt Edge type */
+    .intMask    = CY_GPIO_INTR_EN_MASK, /* Interrupt enable mask */
+    .vtrip      = CY_GPIO_VTRIP_CMOS,   /* Input buffer voltage trip type */
+    .slewRate   = CY_GPIO_SLEW_FAST,    /* Output buffer slew rate */
+    .driveSel   = CY_GPIO_DRIVE_FULL,   /* Drive strength */
+    .vregEn     = 0u,                   /* SIO pair output buffer mode */
+    .ibufMode   = 0u,                   /* SIO pair input buffer mode */
+    .vtripSel   = 0u,                   /* SIO pair input buffer trip point */
+    .vrefSel    = 0u,                   /* SIO pair reference voltage for input buffer trip point */
+    .vohSel     = 0u                    /* SIO pair regulated voltage output level */
 };
 
 const cy_stc_gpio_pin_config_t P1_4_Pin_Init =
 {
-	.outVal     = 1u,                   /* Pin output state */
-	.driveMode  = CY_GPIO_DM_PULLUP,    /* Drive mode */
-	.hsiom      = HSIOM_SEL_GPIO,       /* HSIOM selection */
-	.intEdge    = CY_GPIO_INTR_FALLING, /* Interrupt Edge type */
-	.intMask    = CY_GPIO_INTR_EN_MASK, /* Interrupt enable mask */
-	.vtrip      = CY_GPIO_VTRIP_CMOS,   /* Input buffer voltage trip type */
-	.slewRate   = CY_GPIO_SLEW_FAST,    /* Output buffer slew rate */
-	.driveSel   = CY_GPIO_DRIVE_FULL,   /* Drive strength */
-	.vregEn     = 0u,                   /* SIO pair output buffer mode */
-	.ibufMode   = 0u,                   /* SIO pair input buffer mode */
-	.vtripSel   = 0u,                   /* SIO pair input buffer trip point */
-	.vrefSel    = 0u,                   /* SIO pair reference voltage for input buffer trip point */
-	.vohSel     = 0u                    /* SIO pair regulated voltage output level */
+    .outVal     = 1u,                   /* Pin output state */
+    .driveMode  = CY_GPIO_DM_PULLUP,    /* Drive mode */
+    .hsiom      = HSIOM_SEL_GPIO,       /* HSIOM selection */
+    .intEdge    = CY_GPIO_INTR_FALLING, /* Interrupt Edge type */
+    .intMask    = CY_GPIO_INTR_EN_MASK, /* Interrupt enable mask */
+    .vtrip      = CY_GPIO_VTRIP_CMOS,   /* Input buffer voltage trip type */
+    .slewRate   = CY_GPIO_SLEW_FAST,    /* Output buffer slew rate */
+    .driveSel   = CY_GPIO_DRIVE_FULL,   /* Drive strength */
+    .vregEn     = 0u,                   /* SIO pair output buffer mode */
+    .ibufMode   = 0u,                   /* SIO pair input buffer mode */
+    .vtripSel   = 0u,                   /* SIO pair input buffer trip point */
+    .vrefSel    = 0u,                   /* SIO pair reference voltage for input buffer trip point */
+    .vohSel     = 0u                    /* SIO pair regulated voltage output level */
 };
 
 /* This structure initializes the Port0 interrupt for the NVIC */
 cy_stc_sysint_t intrCfg0_4 =
 {
-	.intrSrc = ioss_interrupts_gpio_0_IRQn, /* Interrupt source is GPIO port 0 and 1 interrupt */
-	.intrPriority = 2UL                     /* Interrupt priority is 2 */
+    .intrSrc = ioss_interrupts_gpio_0_IRQn, /* Interrupt source is GPIO port 0 and 1 interrupt */
+    .intrPriority = 2UL                     /* Interrupt priority is 2 */
 };
 
 cy_stc_sysint_t intrCfg1_4 =
 {
-	.intrSrc = ioss_interrupts_gpio_1_IRQn, /* Interrupt source is GPIO port 0 and 1 interrupt */
-	.intrPriority = 2UL                     /* Interrupt priority is 2 */
+    .intrSrc = ioss_interrupts_gpio_1_IRQn, /* Interrupt source is GPIO port 0 and 1 interrupt */
+    .intrPriority = 2UL                     /* Interrupt priority is 2 */
 };
 
 
@@ -208,27 +208,27 @@ uint32_t aboutScreenShown = 0;
 
 void GPIO_Interrupt()
 {
-	   uint32 portIntrStatus;
+    uint32 portIntrStatus;
+       
+    /* Check to determine which pin in the port generated interrupt. */
+    portIntrStatus = P0_4_PORT->INTR;
+    if(CY_GPIO_INTR_STATUS_MASK == ((portIntrStatus >> P0_4_NUM) & CY_GPIO_INTR_STATUS_MASK))
+    {
+        screenChange = GPIO_ISR_FLAG;
 
-	        /* Check to determine which pin in the port generated interrupt. */
-	        portIntrStatus = P0_4_PORT->INTR;
-	        if(CY_GPIO_INTR_STATUS_MASK == ((portIntrStatus >> P0_4_NUM) & CY_GPIO_INTR_STATUS_MASK))
-	        {
-	        	screenChange = GPIO_ISR_FLAG;
+        /* Clear pin interrupt logic. Required to detect next interrupt */
+        Cy_GPIO_ClearInterrupt(P0_4_PORT, P0_4_NUM);
+    }
 
-	    	    /* Clear pin interrupt logic. Required to detect next interrupt */
-	    	    Cy_GPIO_ClearInterrupt(P0_4_PORT, P0_4_NUM);
-	        }
+    /* Check to determine which pin in the port generated interrupt. */
+    portIntrStatus = P1_4_PORT->INTR;
+    if(CY_GPIO_INTR_STATUS_MASK == ((portIntrStatus >> P1_4_NUM) & CY_GPIO_INTR_STATUS_MASK))
+    {
+        aboutTrigger = GPIO_ISR_FLAG;
 
-	        /* Check to determine which pin in the port generated interrupt. */
-	        portIntrStatus = P1_4_PORT->INTR;
-	        if(CY_GPIO_INTR_STATUS_MASK == ((portIntrStatus >> P1_4_NUM) & CY_GPIO_INTR_STATUS_MASK))
-	        {
-	        	aboutTrigger = GPIO_ISR_FLAG;
-
-	    	    /* Clear pin interrupt logic. Required to detect next interrupt */
-	    	    Cy_GPIO_ClearInterrupt(P1_4_PORT, P1_4_NUM);
-	        }
+        /* Clear pin interrupt logic. Required to detect next interrupt */
+        Cy_GPIO_ClearInterrupt(P1_4_PORT, P1_4_NUM);
+    }
 }
 
 int main(void)
@@ -239,7 +239,7 @@ int main(void)
     result = cybsp_init() ;
     if(result != CY_RSLT_SUCCESS)
     {
-    	CY_ASSERT(0);
+        CY_ASSERT(0);
     }
 
     __enable_irq();
@@ -296,88 +296,88 @@ int main(void)
 
     for (;;)
     {
-    	// change screen
-    	if(screenChange)
-    	{
-    		if(global_jump_to_screen == 0) //
-    		{
-    			altiaSendEvent(ALT_ANIM(INTRO_to_main), 1);
+        // change screen
+        if(screenChange)
+        {
+            if(global_jump_to_screen == 0) //
+            {
+                altiaSendEvent(ALT_ANIM(INTRO_to_main), 1);
 
-    			global_jump_to_screen = 1;
-    		}
-    		else
-    		{
-    			AltiaEventType value;
-    		    altiaPollEvent(ALT_ANIM(GLOBAL_demo_type), &value);
+                global_jump_to_screen = 1;
+            }
+            else
+            {
+                AltiaEventType value;
+                altiaPollEvent(ALT_ANIM(GLOBAL_demo_type), &value);
 
-    		    global_jump_to_screen = (int)value + 1;
+                global_jump_to_screen = (int)value + 1;
 
-    			if(global_jump_to_screen > 4) global_jump_to_screen = 1;
-    		}
+                if(global_jump_to_screen > 4) global_jump_to_screen = 1;
+            }
 
-    		// make sure that an eventually running About Screen is set invisible
-    		altiaSendEvent(ALT_ANIM(ABOUT_screen_visible), 0);
-			altiaSendEvent(ALT_ANIM(GLOBAL_jump_to_screen), global_jump_to_screen);
+            // make sure that an eventually running About Screen is set invisible
+            altiaSendEvent(ALT_ANIM(ABOUT_screen_visible), 0);
+            altiaSendEvent(ALT_ANIM(GLOBAL_jump_to_screen), global_jump_to_screen);
 
-			// when a screen change was done ABOUT screen is not shown
-			aboutScreenShown = 0;
+            // when a screen change was done ABOUT screen is not shown
+            aboutScreenShown = 0;
 
-			screenChange = 0;
-    	}
+            screenChange = 0;
+        }
 
-    	// ABOUT screen
-    	if(aboutTrigger)
-    	{
-    		if(!aboutScreenShown)
-    		{
-    			AltiaEventType value;
+        // ABOUT screen
+        if(aboutTrigger)
+        {
+            if(!aboutScreenShown)
+            {
+                AltiaEventType value;
 
-    			// check if INTRO is still running
-    			altiaPollEvent(ALT_ANIM(INTRO_screen_visible), &value);
+                // check if INTRO is still running
+                altiaPollEvent(ALT_ANIM(INTRO_screen_visible), &value);
 
-    			if(value == 1)
-    			{
-    				// do nothing
-    			}
-    			else
-    			{
-    				// figure out which demo screen is currently shown
-    				altiaPollEvent(ALT_ANIM(GLOBAL_demo_type), &value);
+                if(value == 1)
+                {
+                    // do nothing
+                }
+                else
+                {
+                    // figure out which demo screen is currently shown
+                    altiaPollEvent(ALT_ANIM(GLOBAL_demo_type), &value);
 
-    				if(value == 1)
-    				{
-    					altiaSendEvent(ALT_ANIM(MEDICAL_stimulus_about), 1);
-    					aboutScreenShown = 1;
-    				}
-    				else if(value == 2)
-    				{
-    					altiaSendEvent(ALT_ANIM(HOMEAPP_stimulus_about), 1);
-    					aboutScreenShown = 1;
-    				}
-    				else if(value == 3)
-    				{
-    					altiaSendEvent(ALT_ANIM(CONAG_stimulus_about), 1);
-    					aboutScreenShown = 1;
-    				}
-    				else if(value == 4)
-    				{
-    					altiaSendEvent(ALT_ANIM(AUTO_stimulus_about), 1);
-    					aboutScreenShown = 1;
-    				}
-    			}
-    		}
-    		else
-    		{
-    			altiaSendEvent(ALT_ANIM(ABOUT_stimulus_back), 1);
-    			aboutScreenShown = 0;
-    		}
+                    if(value == 1)
+                    {
+                        altiaSendEvent(ALT_ANIM(MEDICAL_stimulus_about), 1);
+                        aboutScreenShown = 1;
+                    }
+                    else if(value == 2)
+                    {
+                        altiaSendEvent(ALT_ANIM(HOMEAPP_stimulus_about), 1);
+                        aboutScreenShown = 1;
+                    }
+                    else if(value == 3)
+                    {
+                        altiaSendEvent(ALT_ANIM(CONAG_stimulus_about), 1);
+                        aboutScreenShown = 1;
+                    }
+                    else if(value == 4)
+                    {
+                        altiaSendEvent(ALT_ANIM(AUTO_stimulus_about), 1);
+                        aboutScreenShown = 1;
+                    }
+                }
+            }
+            else
+            {
+                altiaSendEvent(ALT_ANIM(ABOUT_stimulus_back), 1);
+                aboutScreenShown = 0;
+            }
 
-    		aboutTrigger = 0;
-    	}
+            aboutTrigger = 0;
+        }
 
-    	altiaSendEvent(ALT_ANIM(do_timer), 1);
+        altiaSendEvent(ALT_ANIM(do_timer), 1);
 
-    	altiaFlushOutput();
+        altiaFlushOutput();
     }
 }
 
